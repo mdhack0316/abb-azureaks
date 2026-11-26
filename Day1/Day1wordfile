@@ -35,3 +35,29 @@
    86  curl -LO "https://k8s.io(curl -L -s https://k8s.io)/bin/linux/amd64/kubectl"
    87  sudo snap install kubectl --classic
    88  kubectl get nodes
+
+
+
+
+
+
+  5  kubectl.exe get nodes
+    6  kubectl.exe get ns
+    7  kubectl.exe get  pods
+    8  kubectl.exe get deployment
+    9  kubectl.exe get pods
+   10  kubectl.exe delete all --all --force
+   11  kubectl.exe get pods
+   12  kubectl.exe get pods
+   13  kubectl.exe delete all --all --force
+   14  kubectl.exe get pods
+   15  kubectl.exe get ns
+   16  kubectl.exe cluster-info
+   17  kubectl.exe api-versions
+   18  kubectl.exe api-versions | wc -l
+   19  kubectl.exe    api-resources
+   20  kubectl.exe api-versions | wc -l
+   21  kubectl.exe    api-resources  | wc -l
+   22  kubectl.exe   --help
+   23  kubectl.exe version
+
