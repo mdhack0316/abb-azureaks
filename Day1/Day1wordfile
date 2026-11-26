@@ -1,0 +1,28 @@
+ 1  whoami
+    2  apt updayr  && apt install docker.io -y
+    3  apt update  && apt install docker.io -y
+    4  docker info 
+    5  uname -r 
+    6  docker info  | grep -i kernel
+    7  docker pull nginx
+    8  docker image
+    9  docker images
+   10  docker run nginx 
+   11  docker run  -itd  nginx 
+   12  docker ps 
+   13  docker ps  -a
+   14  docker images
+   15  docker ps -a
+   16  docker inspect peaceful_ganguly
+   17  curl 172.17.0.2
+   18  docker ps -a
+   19  docker stop peaceful_ganguly
+   20  docker ps -a
+   21  docker stop peaceful_ganguly
+   22  docker stop  peaceful_ganguly
+   23  docker ps -a
+   24  docker start 
+   25  docker start  peaceful_ganguly
+   26  docker start 
+   27  docker ps -a
+   28  history 
