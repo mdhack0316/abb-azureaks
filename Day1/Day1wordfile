@@ -26,3 +26,12 @@
    26  docker start 
    27  docker ps -a
    28  history 
+
+
+
+ 83  mkdir   .kube
+   84  vim  .kube/config
+   85  kubectl  
+   86  curl -LO "https://k8s.io(curl -L -s https://k8s.io)/bin/linux/amd64/kubectl"
+   87  sudo snap install kubectl --classic
+   88  kubectl get nodes
