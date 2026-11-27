@@ -125,3 +125,64 @@ spec:
 status: {}
 
 
+
+
+Kubernetes Services
+
+ 206  kubectl.exe create deployment mayank --image nginx
+  207  kubectl.exe  get pods --show-labels
+  208  kubectl.exe expose deployment mayank --port 80
+  209  kubectl.exe get svc
+  210  kubectl.exe get pods -o wide
+  211  kubectl.exe describe svc
+  212  kubectl.exe delete pod mayank-7b4779f6bf-8kkgc
+  213  kubectl.exe get pods -o wide
+  214  kubectl.exe get pods -o wide
+  215  kubectl.exe get pods -o wide
+  216  kubectl.exe describe svc
+  217  kubectl.exe exec  -it mayank-7b4779f6bf-wfppc  -- curl 10.0.57.18
+  218  kubectl.exe delete pod mayank-7b4779f6bf-wfppc
+  219  kubectl.exe get pods
+  220  kubectl.exe exec -it  mayank-7b4779f6bf-h2sw7  -- curl 10.0.57.18
+  221  kubectl.exe get node
+  222  kubectl.exe describe node aks-ss-32267175-vms1
+  223  kubectl.exe create service nodeport  --tcp 80    --name mayank
+  224  kubectl.exe create service nodeport  --tcp 80    mayank   --dry-run -o yaml
+  225  kubectl.exe create service nodeport  --tcp 80    abb   --dry-run -o yaml   > svc.yml
+  226  vim svc.yml
+  227  kubectl.exe create -f svc.yml
+  228  kubectl.exe get svc
+  229  kubectl.exe describe svc abb
+  230  kubectl.exe get pods --show-labels
+  231  cat svc.yml
+  232  kubectl.exe edit svc abb
+  233  kubectl.exe describe svc abb
+  234  kubectl.exe get pods -o wide
+  235  kubectl.exe expose deployment mayank --port 80 --name web1  --type LoadBalancer
+  236  kubectl.exe get svc
+  237  kubectl.exe get svc
+  238  kubectl.exe delete all --all --fore
+  239  kubectl.exe delete all --all --force
+
+
+ cat svc.yml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: abb
+  name: abb
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: abb
+  type: NodePort
+status:
+  loadBalancer: {}
+
+
+
