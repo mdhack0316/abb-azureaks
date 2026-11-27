@@ -243,3 +243,135 @@ Kubernetes RBAC
    63  kubectl get pv  --kubeconfig eric.kubeconfig
    64  his
 
+
+
+
+
+
+
+Helm installation 
+ 
+
+
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+
+
+
+Steps to install  Dashboard 
+
+506  helm
+  507  helm list
+  508  helm repo list
+  509  helm search apache
+  510  helm search
+  511  helm repo list
+  512  helm search hub apache
+  513  helm repo add   mybitnami  https://charts.bitnami.com/bitnami
+  514  helm repo list
+  515  helm repo update
+  516  helm search repo apache
+  517  helm search repo dashboard
+  518  helm search hub kubernetes-dashboard
+  519  helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+  520  helm repo add kubernetes-dashboard https://kubernetes-retired.github.io/dashboard/
+  521  helm repo update
+  522  helm search repo kubernetes-dashboard --versions
+  523  helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --namespace yournamespace  --create-namespace
+
+
+
+ kubectl get all -n kubernetes-dashboard
+  525  kubectl -n kubernetes-dashboard edit service kubernetes-dashboard-web
+  526  kubectl get all -n kubernetes-dashboard
+  527  vim token.yml
+  528  kubectl create -f to
+  529  kubectl create -f token.yml
+  530  kubectl -n kubernetes-dashboard create token dashboard-admin
+  531  kubectl get all -n kubernetes-dashboard
+  532  kubectl -n kubernetes-dashboard edit service kubernetes-dashboard-kong-proxy
+  533  kubectl get all -n kubernetes-dashboard
+  534  kubectl auth can-i '*' '*'   --as=system:serviceaccount:kubernetes-dashboard:dashboard-admin
+  535  kubectl get sa dashboard-admin   -n kubernetes-dashboard
+  536  kubectl get clusterrolebinding dashboard-admin-binding
+  537  kubectl create token dashboard-admin   -n kubernetes-dashboard   --duration=1h
+  538  history
+
+
+
+root@master:~# cat token.yml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: subho-admin
+  Namespace: y our name spacename 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dashboard-subho-binding
+subjects:
+  - kind: ServiceAccount
+    name: subho-admin
+    namespace:y our name spacename
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+
+
+
+
+
+Editing for service is necessary 
+
+
+Kubernetes-dashboard-web
+
+
+Kong proxy 
+
+
+Clusterip – nodeport 
+
+
+Use  https://184.35.109.171   —   paste token 
+
+
+Monitoring  Stack
+
+
+ 549  helm repo add  monitoring-mayank https://prometheus-community.github.io/helm-charts
+  550  helm update
+  551  helm repo update
+  552  helm search repo kube-prometheus
+  553  helm pull  monitoring-mayank/kube-prometheus-stack
+  554  ls
+  555  rm -rf kube-prometheus-stack-93.10.1.tgz
+  556  helm pull  monitoring-mayank/kube-prometheus-stack  --untar
+  557  ls
+  558  cd kube-prometheus-stack/
+  559  ls
+  560  tree
+  561  apt install tree
+  562  tree
+  563  tree | grep -i   yaml
+  564  tree | grep -i   yaml | wc -l
+  565* l
+  566  tree | grep -i   ml | wc -l
+  567  tree | grep -i   yml | wc -l
+  568  cd
+  569  helm install mayankmonitoring   ./kube-prometheus-stack/
+  570  kubectl get all
+  571  kubectl edit svc mayankmonitoring-grafana
+  572  kubectl get all
+  573  kubectl get secret
+  574  kubectl get secret  mayankmonitoring-grafana -o yaml
+  575  echo YWRtaW4=  | base64 -
+  576  echo YWRtaW4=  | base64 d
+  577  echo YWRtaW4=  | base64 -d
+  578  echo  UGpWZ2d5UGoxckdzU0pORGtVT2ExQVE2SmVxT0VieXN5eHZ0MTVQag==   | base64 -d
+
+
