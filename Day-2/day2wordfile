@@ -1,4 +1,7 @@
-  106  kubectl.exe get nodes
+Namespace
+  
+
+106  kubectl.exe get nodes
   107  kubectl.exe get pods
   108  kubectl.exe get namespace
   109  kubectl.exe get pods  -n kube-system
@@ -12,3 +15,113 @@
   117  kubectl.exe get pods
   118  kubectl.exe get pods  -n default
   119  history
+
+
+
+Pods and deployment 
+
+
+ 153  kubectl.exe   run  mypod  --image nginx
+  154  kubectl.exe get pods
+  155  kubectl.exe get pods -o wide
+  156  kubectl.exe describe pod mypod
+  157  kubectl.exe get pods
+  158* kubectl.exe delete pod mypod
+  159  kubectl.exe get pods
+  160  kubectl.exe create deployment mayank --image httpd
+  161  kubectl.exe get deployment
+  162  kubectl.exe get rs
+  163  kubectl.exe get pods
+  164  kubectl.exe get all
+  165  kubectl.exe describe deployment mayank
+  166  kubectl.exe describe rs
+  167  kubectl.exe  describe pod  mayank-664d48d7cc-frtm6
+  168  kubectl.exe get all
+  169  kubectl.exe delete pod  mayank-664d48d7cc-frtm6
+  170  kubectl.exe get all
+  171  kubectl.exe get all
+  172  kubectl.exe delete rs mayank-664d48d7cc
+  173  kubectl.exe get all
+  174  kubectl.exe delete deployment mayank
+  175  kubectl.exe get all
+  176  vim pod.yaml
+  177  kubectl.exe api-resources
+  178  vim pod.yaml
+  179  ll
+  180  kubectl.exe create -f pod.yaml
+  181  kubectl.exe get all
+  182  kubectl.exe get pods
+  183  kubectl.exe describe pod mypod1
+  184  kubectl.exe get pods -o wide
+  185  cat pod.yaml
+  186  kubectl.exe   run  mypod  --image nginx      --dry-run
+  187  kubectl.exe get pods
+  188  kubectl.exe   run  mypod  --image nginx      --dry-run    -o yaml
+  189  kubectl.exe   run  mypod  --image nginx      --dry-run    -o yaml  > pod1.yaml
+  190  vim pod1.yaml
+  191  kubectl.exe create deployment mayank --image httpd  --dry-run  -o yaml > dep.yaml
+  192  vim de
+  193  vim dep.yaml
+  194  cat dep.yaml
+  195  kubectl.exe create -f dep.yaml
+  196  kubectl.exe get all
+  197  kubectl.exe delete -f dep.yaml
+  198  kubectl.exe delete -f pod1.yaml
+  199  kubectl.exe delete pod mypod1
+
+ cat pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod1
+spec:
+  containers:
+  - name: mayank
+    image: nginx
+
+
+ cat pod1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: mypod
+  name: mypod
+spec:
+  containers:
+  - image: nginx
+    name: mypod
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+
+
+
+
+ cat dep.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mayank
+  name: mayank
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mayank
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mayank
+    spec:
+      containers:
+      - image: httpd
+        name: httpd
+        resources: {}
+status: {}
+
+
