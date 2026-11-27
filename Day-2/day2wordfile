@@ -1,0 +1,14 @@
+  106  kubectl.exe get nodes
+  107  kubectl.exe get pods
+  108  kubectl.exe get namespace
+  109  kubectl.exe get pods  -n kube-system
+  110  kubectl.exe get pods
+  111  cat  .kube/config
+  112  kubectl.exe   config get-contexts
+  113  kubectl.exe create namespace mayank
+  114  kubectl.exe get namespace
+  115  kubectl.exe   config set-context  mayanktest  --namespace mayank
+  116  kubectl.exe   config get-contexts
+  117  kubectl.exe get pods
+  118  kubectl.exe get pods  -n default
+  119  history
