@@ -185,4 +185,61 @@ status:
   loadBalancer: {}
 
 
+Kubernetes RBAC
+
+
+ 11  mkdir code
+   12  cd code/
+   13  ls
+   14  cp /etc/kubernetes/pki/ca.crt   .
+   15  cp /etc/kubernetes/pki/ca.key   .
+   16  ls
+   17  openssl gen -out eric.key 1024
+   18  openssl genrsa -out eric.key 1024
+   19  ls
+   20  openssl  req -new  -key eric.key  -out eric.csr  '/CN=eric/O=tech'
+   21  openssl  req -new  -key eric.key  -out eric.csr  -subj  '/CN=eric/O=tech'
+   22  ls
+   23  cat eric.csr
+   24  openssl x509  -req -in eric.csr   -out eric.crt   -CAkey ca.key   -CA ca.crt  -CAcreateserial
+   25  ls
+   26  cat eric.crt
+   27  cat /root/.kube/config
+   28  cp  /root/.kube/config   /
+   29  ls
+   30  cat   /root/.kube/config
+   31  kubectl config set-cluster kubernetes   --server https://172.31.8.12:6443   --certificate-authority=ca.crt   --kubeconfig eric.kubeconfig
+   32  cat eric.kubeconfig
+   33  kubectl config set-credentials   eric --client-key eric.key   --client-certificate  eric.crt   --kubeconfig  eric.kubeconfig
+   34  cat eric.kubeconfig
+   35  kubectl get pods  --kubeconfig eric.kubeconfig
+   36  kubectl config set-context myeric  --user eric --cluster kubernetes   --namespace default  --kubeconfig eric.kubeconfig
+   37  cat eric.kubeconfig
+   38  kubectl get pods  --kubeconfig eric.kubeconfig
+   39  kubectl config use-context  myeric  --kubeconfig eric.
+   40  kubectl config use-context  myeric  --kubeconfig eric.kubeconfig
+   41  kubectl get pods  --kubeconfig eric.kubeconfig
+   42  history
+   43  cat eric.kubeconfig
+   44  kubectl create role ericrole  --resources=pods  --verb=get
+   45  kubectl create role ericrole  --resource=pods  --verb=get
+   46  kubectl get pods  --kubeconfig eric.kubeconfig
+   47  kubectl create rolebinding  ericrb  --role ericrole  --user eric
+   48  kubectl get pods  --kubeconfig eric.kubeconfig
+   49  kubectl edit role ericrole
+   50  kubectl get pods  --kubeconfig eric.kubeconfig
+   51  kubectl get ns  --kubeconfig eric.kubeconfig
+   52  kubectl run pod --image nginx   --kubeconfig eric.kubeconfig
+   53  kubectl edit role ericrole
+   54  kubectl run pod --image nginx   --kubeconfig eric.kubeconfig
+   55  kubectl get pods --kubeconfig eric.kubeconfig
+   56  kubectl delete pod pod  --kubeconfig eric.kubeconfig
+   57  kubectl edit role ericrole
+   58  kubectl delete pod pod  --kubeconfig eric.kubeconfig
+   59  kubectl get pv  --kubeconfig eric.kubeconfig
+   60  kubectl create clusterrole ericcr --resource=persistentvolumes  --verb=list
+   61  kubectl get pv  --kubeconfig eric.kubeconfig
+   62  kubectl create clusterrolebinding ericcrb --user=eric   --clusterrole=ericcr
+   63  kubectl get pv  --kubeconfig eric.kubeconfig
+   64  his
 
